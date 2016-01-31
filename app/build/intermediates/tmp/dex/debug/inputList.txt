@@ -1,0 +1,9 @@
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\classes\debug
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-61a4dd3a304a0c353e3c8f7d76fbbae1137fe19e.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\classes-6f1e7f322a849e9515e99fe128d901dee257f11a.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\eventbus-2.4.0-0eef86f72d15a4480e8ef0ea7df402040c12d466.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\gson-2.2.4-b66ef5d6bd85e85fa1bfb40d34f122bd6a549dde.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\commons-io-2.4-5ac828941750fd67b8f229926579dfa247337064.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-8f14a2b1435d09badda20bd6c4e57d351e700468.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\classes-bce5ba7cad9f624c75ef38774ae2a44eb749a5de.jar
+C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\classes-9be36f5d3c99ce9f17f17f9a81af3599adb0bdae.jar

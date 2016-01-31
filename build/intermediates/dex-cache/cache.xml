@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\CR7\Desktop\AndroidEmojiFix\app\libs\commons-io-2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\commons-io-2.4-5ac828941750fd67b8f229926579dfa247337064.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-8f14a2b1435d09badda20bd6c4e57d351e700468.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\exploded-aar\com.txusballesteros\bubbles\1.2.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b7efa6ff2b55fc9c3a29e42b4e7a0f1f8a846940">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\classes-6f1e7f322a849e9515e99fe128d901dee257f11a.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\classes-bce5ba7cad9f624c75ef38774ae2a44eb749a5de.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\gson-2.2.4-b66ef5d6bd85e85fa1bfb40d34f122bd6a549dde.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\.gradle\caches\modules-2\files-2.1\de.greenrobot\eventbus\2.4.0\ddd166d01b3158d1c00576d29f7ed15c030df719\eventbus-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\eventbus-2.4.0-0eef86f72d15a4480e8ef0ea7df402040c12d466.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-61a4dd3a304a0c353e3c8f7d76fbbae1137fe19e.jar" />
+    </item>
+    <item
+        jar="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\CR7\Desktop\AndroidEmojiFix\app\build\intermediates\pre-dexed\debug\classes-9be36f5d3c99ce9f17f17f9a81af3599adb0bdae.jar" />
+    </item>
+
+</items>
