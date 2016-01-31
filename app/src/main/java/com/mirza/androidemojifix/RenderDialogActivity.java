@@ -39,6 +39,8 @@ public class RenderDialogActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_render_dialog);
 
+        getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_bg));
+
         Button doneButton = (Button)findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +49,7 @@ public class RenderDialogActivity extends Activity {
             }
         });
 
-        TextView tv = (TextView)findViewById(R.id.textView);
-
-        RelativeLayout renderLayout = (RelativeLayout)findViewById(R.id.renderLayout);
+        RenderLayout renderLayout = (RenderLayout)findViewById(R.id.renderLayout);
 
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
@@ -64,94 +64,79 @@ public class RenderDialogActivity extends Activity {
                 byte[] subArray = {textToRenderBytes[i], textToRenderBytes[i+1], textToRenderBytes[i+2], textToRenderBytes[i+3]};
                 String currChar = new String(subArray, "UTF-32BE");
 
+                // if it is a messeddd up emoji (peace sign, heart, smiley face, finger pointing up)
+                if (currChar.equals("☺") || currChar.equals("❤") || currChar.equals("✌") ||
+                        currChar.equals("☝")) {
+
+                    String nextChar = "️";
+                    currChar = currChar + nextChar;
+                }
+
                 // if it is a modifier
                 // TODO: check for country flags
                 if (currChar.equals("🏻") || currChar.equals("🏼") || currChar.equals("🏽") || currChar.equals("🏾") ||
                         currChar.equals("🏿")) {
                     int index = chars.size() - 1;
                     if (chars.size() > 0) {
-                        String joinedChars = chars.get(index) + currChar;
+                        String lastChar = chars.get(index);
+                        if (lastChar.equals("☝️") || lastChar.equals("☺️") || lastChar.equals("❤️")||
+                                lastChar.equals("✌️")) {
+                            lastChar = lastChar.split("️")[0];
+                        }
+                        String joinedChars = lastChar + currChar;
                         if (isEmoji(joinedChars)) {
-                            chars.add(index, joinedChars);
+                            chars.remove(index);
+                            chars.add(joinedChars);
+                        } else {
+                            chars.add(currChar);
                         }
                     }
                 // if it is a zero width joiner
                 } else if (currChar.equals("\u200D")) {
+                    int index = chars.size() - 1;
                     i += 4;
                     byte[] subArrayNext = {textToRenderBytes[i], textToRenderBytes[i+1], textToRenderBytes[i+2], textToRenderBytes[i+3]};
                     String nextChar = new String(subArrayNext, "UTF-32BE");
-                    String joinedChars = chars.get(chars.size() - 1) + currChar + nextChar;
-                    if (isEmoji(joinedChars)) {
-                        chars.add(chars.size() - 1, joinedChars);
-                    }
-                // if it is a messeddd up emoji (peace sign, heart, smiley face, finger pointing up)
-                } else if (currChar.equals("☺") || currChar.equals("❤") || currChar.equals("✌") ||
-                        currChar.equals("☝")) {
-
-                    String nextChar = "️";
-                    String joinedChars = currChar + nextChar;
+                    String joinedChars = chars.get(index) + currChar + nextChar;
+                    chars.remove(index);
                     chars.add(joinedChars);
                 } else {
                     chars.add(currChar);
-
                 }
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         boolean textViewAvailable = false;
-        int deviceWidth = getResources().getDisplayMetrics().widthPixels;
         for (int i = 0; i < chars.size(); i++) {
             if (isEmoji(chars.get(i))) {
                 File mediaDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) +
                         File.separator + "AndroidEmojiFix" + File.separator);
-                File emojiFile = new File(mediaDirectory, chars.get(i));
+                File emojiFile = new File(mediaDirectory, chars.get(i)+".png");
                 Bitmap myBitmap = BitmapFactory.decodeFile(emojiFile.getAbsolutePath());
-                ImageView imageView = new ImageView(this);
-                imageView.setImageBitmap(myBitmap);
-                imageView.setMaxWidth(20);
-                imageView.setMaxHeight(20);
-                if (renderLayout.getChildCount() == 0) {
-                    renderLayout.addView(imageView);
-                    continue;
-                }
-                View lastChild = renderLayout.getChildAt(renderLayout.getChildCount() - 1);
-                if (lastChild.getX() + lastChild.getWidth() + imageView.getWidth() > deviceWidth) {
-                    // move down
-                    ((RelativeLayout.LayoutParams)imageView.getLayoutParams()).addRule(RelativeLayout.BELOW, lastChild.getId());
-                } else {
-                    // move right
-                    imageView.setX(lastChild.getX() + lastChild.getWidth());
-
-                }
-                renderLayout.addView(imageView);
+                EmojiView emojiView = new EmojiView(this, 80);
+                emojiView.setImageBitmap(myBitmap);
+                renderLayout.addView(emojiView);
                 textViewAvailable = false;
             } else if (chars.get(i).equals(" ")) {
+                TextView textView = new TextView(this);
+                textView.setText(" ");
+                renderLayout.addView(textView);
                 textViewAvailable = false;
 
             } else {
                 if (textViewAvailable) {
                     TextView textView = (TextView)renderLayout.getChildAt(renderLayout.getChildCount() - 1);
                     textView.setText(textView.getText()+chars.get(i));
-                    if (textView.getX() + textView.getWidth() > deviceWidth) {
-                        View lastChild = renderLayout.getChildAt(renderLayout.getChildCount() - 2);
-                        ((RelativeLayout.LayoutParams)textView.getLayoutParams()).addRule(RelativeLayout.BELOW, lastChild.getId());
-                    }
                 } else {
                     TextView textView = new TextView(this);
+                    textView.setTextSize(20);
                     textView.setText(chars.get(i));
-                    textView.setMaxLines(1);
-                    if (renderLayout.getChildCount() > 0) {
-                        View lastChild = renderLayout.getChildAt(renderLayout.getChildCount() - 1);
-                        if (lastChild.getY() == textView.getY()) {
-
-                        }
-                    }
                     renderLayout.addView(textView);
                     textViewAvailable = true;
                 }
             }
-            Toast.makeText(this, chars.get(i)+isEmoji(chars.get(i)), Toast.LENGTH_LONG).show();
         }
 
 
@@ -173,14 +158,20 @@ public class RenderDialogActivity extends Activity {
 
         File mediaDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) +
                 File.separator + "AndroidEmojiFix" + File.separator);
-        String[] fileNames = mediaDirectory.list();
+        File emojiFile = new File(mediaDirectory, currChar+".png");
+        if (emojiFile.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+        /*String[] fileNames = mediaDirectory.list();
         for (int i = 0; i < fileNames.length; i++) {
-            Log.e("EMOJIS", fileNames[i]);
+            //Log.e("EMOJIS", fileNames[i]);
             if (fileNames[i].equals(currChar+".png")) {
                 return true;
             }
         }
-        return false;
+        return false;*/
     }
 
     public String readFile(File dir, String fileName) {

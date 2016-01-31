@@ -4,14 +4,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="0dp"
-    android:id="@+id/renderLayout"
     tools:context="com.mirza.androidemojifix.RenderDialogActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <com.mirza.androidemojifix.RenderLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
+        android:id="@+id/renderLayout"/>
 
     <Button
         android:layout_width="match_parent"
@@ -19,7 +17,7 @@
         android:text="DONE"
         android:id="@+id/doneButton"
         style="@android:style/Widget.DeviceDefault.Button.Borderless"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/renderLayout"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

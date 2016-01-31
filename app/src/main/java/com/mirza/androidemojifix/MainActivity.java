@@ -2,11 +2,19 @@ package com.mirza.androidemojifix;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+
+import com.google.gson.GsonBuilder;
+import com.txusballesteros.bubbles.BubbleLayout;
+import com.txusballesteros.bubbles.BubblesManager;
+import com.txusballesteros.bubbles.OnInitializedCallback;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
@@ -35,6 +43,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // thread to download emoji image files
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -52,9 +61,41 @@ public class MainActivity extends Activity {
         });
         //thread.start();
 
+
+
         Intent i = new Intent(this, MainService.class);
         startService(i);
 
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File mediaDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) +
+                        File.separator + "AndroidEmojiFix" + File.separator);
+                File[] files = mediaDirectory.listFiles();
+                Drawable[] drawables = new Drawable[files.length];
+                for (int ij = 0; ij < files.length; ij++) {
+                    drawables[ij] = Drawable.createFromPath(files[ij].getAbsolutePath());
+                }
+
+                File file = new File(getFilesDir(), "Emoji Drawables");
+                try {
+                    file.createNewFile();
+                    FileOutputStream fos = new FileOutputStream(file);
+                    fos.write(new GsonBuilder().create().toJson(drawables).getBytes());
+                    Log.e("DATA", new GsonBuilder().create().toJson(drawables));
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        //t.start();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public void saveImage(final String emojiName, final String imageUrl) {
